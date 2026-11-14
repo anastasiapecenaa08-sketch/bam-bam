@@ -188,6 +188,12 @@ button { font: inherit; color: inherit; }
   grid-template-areas: "photo text";
 }
 
+/* landscape photos get a wider column */
+#sleep,
+#energy { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+#sleep .title,
+#energy .title { font-size: clamp(2.2rem, 3.9vw, 4.6rem); }
+
 /* coloured glow behind every slide */
 .slide::before {
   content: "";
@@ -284,43 +290,110 @@ button { font: inherit; color: inherit; }
 }
 .lead em { color: var(--text); font-style: normal; font-weight: 700; }
 
-/* ---------- Photo ---------- */
+/* ---------- Photo ----------
+   The figure is a box; the .frame inside takes a different shape
+   on every slide (arch, tall, wide, circle, panorama, polaroid). */
 .slide__photo {
   grid-area: photo;
-  justify-self: center;
   position: relative;
   margin: 0;
+  width: 100%;
   height: min(76vh, 780px);
-  aspect-ratio: 3 / 4;
-  max-width: 100%;
-  border-radius: 32px;
+  container-type: size;
+  display: grid;
+  place-items: center;
+}
+
+.frame {
+  --r: .75;               /* width / height */
+  --radius: 32px;
+  position: relative;
+  width: min(100cqw, calc(100cqh * var(--r)));
+  aspect-ratio: var(--r);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #15171d;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, .08),
     0 50px 120px -50px color-mix(in srgb, var(--accent) 70%, transparent);
 }
 
-.slide__photo img {
+.frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: inherit;
-  clip-path: inset(10% 10% 10% 10% round 32px);
+  clip-path: inset(10%);
   transform: scale(1.18);
   transition: clip-path .5s var(--ease), transform .8s var(--ease);
 }
 
-.slide.is-active .slide__photo img {
-  clip-path: inset(0 0 0 0 round 32px);
+.slide.is-active .frame img {
+  clip-path: inset(0);
   transform: scale(1);
   transition: clip-path 1.2s var(--ease) .15s, transform 1.6s var(--ease) .15s;
 }
 
-#hello  .slide__photo img { object-position: 50% 35%; }
-#basics .slide__photo img { object-position: 50% 58%; }
-#sleep  .slide__photo img { object-position: 50% 55%; }
-#food   .slide__photo img { object-position: 50% 42%; }
-#energy .slide__photo img { object-position: 45% 62%; }
-#bark   .slide__photo img { object-position: 60% 78%; }
+/* arch: rounded top, like a window */
+.frame--arch {
+  --r: .8;
+  --radius: 50% 50% 32px 32px / 40% 40% 32px 32px;
+}
+
+/* tall: narrow "story" format */
+.frame--tall { --r: .6; }
+
+/* wide: landscape */
+.frame--wide { --r: 1.3; }
+
+/* circle with a dashed ring around it */
+.frame--circle {
+  --r: 1;
+  --radius: 50%;
+  width: min(calc(100cqw - 36px), calc(100cqh - 36px));
+  outline: 2px dashed color-mix(in srgb, var(--accent) 65%, transparent);
+  outline-offset: 14px;
+}
+
+/* panorama: very wide */
+.frame--pano { --r: 1.6; --radius: 24px; }
+
+/* polaroid: white paper, tilted, with a caption */
+.frame--polaroid {
+  --r: .78;
+  --radius: 6px;
+  width: min(90cqw, calc(90cqh * var(--r)));
+  display: flex;
+  flex-direction: column;
+  padding: 14px 14px 0;
+  background: #f3efe6;
+  overflow: visible;
+  rotate: -4deg;
+  box-shadow:
+    0 40px 90px -30px rgba(0, 0, 0, .85),
+    0 50px 120px -50px color-mix(in srgb, var(--accent) 80%, transparent);
+}
+.frame--polaroid img {
+  flex: 1;
+  min-height: 0;
+  height: auto;
+  border-radius: 3px;
+}
+.frame__caption {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  color: #1d1b18;
+  text-align: center;
+  padding: 12px 0 16px;
+}
+
+/* keep Parker in view inside every crop */
+#hello  .frame img { object-position: 50% 35%; }
+#basics .frame img { object-position: 48% 50%; }
+#sleep  .frame img { object-position: 50% 57%; }
+#food   .frame img { object-position: 50% 35%; }
+#energy .frame img { object-position: 50% 70%; }
+#bark   .frame img { object-position: 55% 80%; }
 
 /* ---------- Hero ---------- */
 .scroll-hint {
@@ -474,7 +547,7 @@ button { font: inherit; color: inherit; }
 /* ---------- Sleep: floating Zzz ---------- */
 .zzz {
   position: absolute;
-  top: 6%;
+  top: 34%;
   right: 8%;
   font-family: var(--font-head);
   font-weight: 800;
@@ -614,9 +687,14 @@ button { font: inherit; color: inherit; }
    ========================================================= */
 @media (max-height: 760px) and (min-width: 821px) {
   .slide { padding-top: 80px; padding-bottom: 40px; }
-  .title { font-size: clamp(2.2rem, 4.6vw, 4.2rem); margin-bottom: 18px; }
+  .title { font-size: clamp(2rem, min(4.6vw, 7.5vh), 4.2rem); margin-bottom: 18px; }
+  #sleep .title,
+  #energy .title { font-size: clamp(2rem, min(3.9vw, 7.5vh), 4.2rem); }
+  .slide--hero .title { font-size: clamp(2.6rem, min(7vw, 12vh), 6rem); }
   .lead { margin-bottom: 24px; }
-  .stat { padding: 12px 16px; }
+  .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none; }
+  .stat { padding: 12px 14px; }
+  .stat dd { font-size: 1.25rem; }
 }
 
 /* =========================================================
@@ -640,18 +718,16 @@ button { font: inherit; color: inherit; }
   .slide__photo {
     order: 0;
     flex: 1 1 0;
-    min-height: 130px;
+    min-height: 150px;
     width: 100%;
     height: auto;
-    aspect-ratio: auto;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, .08),
-      0 30px 70px -36px color-mix(in srgb, var(--accent) 80%, transparent);
   }
-  .slide__photo img { clip-path: inset(8% 8% 8% 8% round 24px); }
-  .slide.is-active .slide__photo img { clip-path: inset(0 0 0 0 round 24px); }
+  .frame--circle {
+    width: min(calc(100cqw - 24px), calc(100cqh - 24px));
+    outline-offset: 8px;
+  }
+  .frame--polaroid { padding: 10px 10px 0; rotate: -3deg; }
+  .frame__caption { padding: 8px 0 10px; font-size: 1rem; }
 
   .slide__text { order: 1; flex: 0 0 auto; max-width: none; }
 
@@ -684,7 +760,7 @@ button { font: inherit; color: inherit; }
 
   .meter__head strong { font-size: 1.3rem; }
   .btn { padding: 14px 24px; }
-  .zzz { top: 10%; right: 16%; }
+  .zzz { top: 40%; right: 12%; }
 }
 
 /* short phones (iPhone SE etc.) */
