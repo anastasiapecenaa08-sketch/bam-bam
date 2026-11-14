@@ -387,13 +387,79 @@ button { font: inherit; color: inherit; }
   padding: 12px 0 16px;
 }
 
+/* ---------- Collages: several photos on one slide ---------- */
+.collage {
+  --cr: 1;                 /* width / height of the whole collage */
+  position: relative;
+  width: min(100cqw, calc(100cqh * var(--cr)));
+  aspect-ratio: var(--cr);
+}
+.collage .frame {
+  position: absolute;
+  height: auto;
+}
+
+/* duo: big main photo + smaller one overlapping the corner */
+.collage--duo { --cr: .95; }
+.collage--duo .frame--main {
+  --r: .75;
+  left: 0;
+  top: 0;
+  width: 69%;
+}
+.collage--duo .frame--inset {
+  --r: .8;
+  --radius: 24px;
+  right: 0;
+  bottom: 0;
+  width: 44%;
+  z-index: 2;
+  box-shadow:
+    0 0 0 6px var(--bg),
+    0 30px 70px -20px rgba(0, 0, 0, .8),
+    0 40px 100px -40px color-mix(in srgb, var(--accent) 80%, transparent);
+}
+
+/* two tilted polaroids */
+.collage--polaroids { --cr: 1.05; }
+.collage .frame--polaroid { --r: .78; }
+.collage--polaroids .frame--p1 {
+  left: 2%;
+  top: 3%;
+  width: 57%;
+  rotate: -6deg;
+}
+.collage--polaroids .frame--p2 {
+  right: 2%;
+  bottom: 2%;
+  width: 52%;
+  rotate: 5deg;
+  z-index: 2;
+}
+.collage .frame__caption { font-size: clamp(.55rem, 3.4cqw, 1.25rem); white-space: nowrap; }
+
+/* the second photo of a collage arrives a little later */
+.collage .frame:nth-child(2) {
+  opacity: 0;
+  translate: 24px 24px;
+  transition: opacity .4s ease, translate .6s var(--ease);
+}
+.slide.is-active .collage .frame:nth-child(2) {
+  opacity: 1;
+  translate: 0 0;
+  transition: opacity .8s ease .55s, translate 1.2s var(--ease) .55s;
+}
+.slide.is-active .collage .frame:nth-child(2) img { transition-delay: .55s; }
+
 /* keep Parker in view inside every crop */
 #hello  .frame img { object-position: 50% 35%; }
-#basics .frame img { object-position: 48% 50%; }
+#basics .frame--main img  { object-position: 50% 50%; }
+#basics .frame--inset img { object-position: 50% 60%; }
 #sleep  .frame img { object-position: 50% 57%; }
 #food   .frame img { object-position: 50% 35%; }
 #energy .frame img { object-position: 50% 70%; }
-#bark   .frame img { object-position: 55% 80%; }
+#bark   .frame--p1 img { object-position: 70% 85%; }
+#bark   .frame--p2 img { object-position: 50% 75%; }
 
 /* ---------- Hero ---------- */
 .scroll-hint {
@@ -726,7 +792,9 @@ button { font: inherit; color: inherit; }
     width: min(calc(100cqw - 24px), calc(100cqh - 24px));
     outline-offset: 8px;
   }
-  .frame--polaroid { padding: 10px 10px 0; rotate: -3deg; }
+  .frame--polaroid { padding: 7px 7px 0; }
+  .collage .frame__caption { padding: 5px 0 7px; }
+  .collage--duo .frame--inset { box-shadow: 0 0 0 4px var(--bg), 0 20px 50px -20px rgba(0, 0, 0, .8); }
   .frame__caption { padding: 8px 0 10px; font-size: 1rem; }
 
   .slide__text { order: 1; flex: 0 0 auto; max-width: none; }
