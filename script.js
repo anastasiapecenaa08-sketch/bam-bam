@@ -160,6 +160,25 @@ window.addEventListener("hashchange", () => {
 });
 
 /* =========================================================
+   Falling snow on the winter slide
+   ========================================================= */
+document.querySelectorAll(".snow").forEach((layer) => {
+  const count = window.innerWidth < 820 ? 28 : 55;
+  for (let i = 0; i < count; i++) {
+    const flake = document.createElement("i");
+    const size = 2 + Math.random() * 5;
+    flake.style.left = Math.random() * 100 + "%";
+    flake.style.setProperty("--s", size.toFixed(1) + "px");
+    flake.style.setProperty("--o", (0.35 + Math.random() * 0.55).toFixed(2));
+    flake.style.setProperty("--b", size > 5 ? "1px" : "0px");
+    flake.style.setProperty("--d", (7 + Math.random() * 9).toFixed(1) + "s");
+    flake.style.setProperty("--delay", (-Math.random() * 16).toFixed(1) + "s");
+    flake.style.setProperty("--x", (Math.random() * 120 - 60).toFixed(0) + "px");
+    layer.appendChild(flake);
+  }
+});
+
+/* =========================================================
    Bark button
    ========================================================= */
 const barkBtn = document.getElementById("barkBtn");

@@ -478,6 +478,80 @@ button { font: inherit; color: inherit; }
 }
 .steps li:last-child p { color: var(--text); font-weight: 600; }
 
+/* postage stamp: white paper with perforated edges and a postmark */
+.frame--stamp {
+  --r: .76;
+  --radius: 2px;
+  width: min(calc(100cqw - 30px), calc((100cqh - 30px) * var(--r)));
+  padding: 14px;
+  background: #f4f8fc;
+  overflow: visible;
+  rotate: -2.5deg;
+  box-shadow:
+    0 40px 90px -30px rgba(0, 0, 0, .85),
+    0 50px 120px -50px color-mix(in srgb, var(--accent-2) 80%, transparent);
+}
+/* the perforation: background-coloured dots sitting on the paper edge */
+.frame--stamp::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 12px dotted var(--bg);
+  pointer-events: none;
+}
+.frame--stamp img { border-radius: 2px; }
+.postmark {
+  position: absolute;
+  z-index: 2;
+  top: 5%;
+  right: 6%;
+  display: grid;
+  place-items: center;
+  width: clamp(58px, 21cqw, 112px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, .85);
+  outline: 2px solid rgba(255, 255, 255, .5);
+  outline-offset: 4px;
+  color: #fff;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(.55rem, 3cqw, .95rem);
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: .08em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .5);
+  rotate: 14deg;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.slide.is-active .postmark { opacity: .9; transition: opacity .8s ease 1.1s; }
+#winter .frame img { object-position: 50% 60%; }
+
+/* falling snow (flakes are added by script.js) */
+.snow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.snow i {
+  position: absolute;
+  top: -10px;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: #fff;
+  opacity: var(--o);
+  filter: blur(var(--b));
+  animation: snowfall var(--d) linear var(--delay) infinite;
+}
+@keyframes snowfall {
+  to { transform: translate(var(--x), 105vh); }
+}
+#winter .slide__text { z-index: 2; }
+
 /* ---------- Collages: several photos on one slide ---------- */
 .collage {
   --cr: 1;                 /* width / height of the whole collage */
@@ -885,6 +959,8 @@ button { font: inherit; color: inherit; }
   }
   .frame--polaroid { padding: 7px 7px 0; }
   .frame--tape { width: min(calc(100cqw - 24px), calc(100cqh - 24px)); }
+  .frame--stamp { padding: 8px; width: min(calc(100cqw - 20px), calc((100cqh - 20px) * var(--r))); }
+  .frame--stamp::after { inset: -4px; border-width: 8px; }
   .steps { gap: 10px; margin-top: 4px; }
   .steps li { grid-template-columns: 36px 1fr; gap: 12px; }
   .steps__icon { width: 36px; height: 36px; border-radius: 11px; font-size: 1.05rem; }
