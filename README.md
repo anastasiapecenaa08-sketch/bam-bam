@@ -20,12 +20,13 @@
 | # | Адрес      | Тема                              | Фото               |
 |---|------------|-----------------------------------|--------------------|
 | 1 | `#hello`   | Meet Parker                       | `photos/hero.jpg`  |
-| 2 | `#basics`  | Порода, возраст, вес              | `photos/night.jpg` + `photos/breed.jpg` |
-| 3 | `#sleep`   | Любит спать, невозможно разбудить | `photos/sleep.jpg` |
-| 4 | `#food`    | Ест как слон, обожает вкусняшки   | `photos/food.jpg`  |
-| 5 | `#energy`  | Очень энергичный                  | `photos/energy.jpg`|
-| 6 | `#bark`    | Угарно гавкает (кнопка с «гав»)   | `photos/bark.jpg` + `photos/home.jpg` (полароиды) |
-| 7 | `#treat`   | «Дай Паркеру вкусняшку» — счётчик | —                  |
+| 2 | `#story`   | Как он появился (сюрприз)         | `photos/puppy.jpg` |
+| 3 | `#basics`  | Порода, возраст, вес              | `photos/night.jpg` + `photos/breed.jpg` |
+| 4 | `#sleep`   | Любит спать, невозможно разбудить | `photos/sleep.jpg` |
+| 5 | `#food`    | Ест как слон, обожает вкусняшки   | `photos/food.jpg`  |
+| 6 | `#energy`  | Очень энергичный                  | `photos/energy.jpg`|
+| 7 | `#bark`    | Угарно гавкает (кнопка с «гав»)   | `photos/bark.jpg` + `photos/home.jpg` (полароиды) |
+| 8 | `#treat`   | «Дай Паркеру вкусняшку» — счётчик | —                  |
 
 ## Как поменять
 
