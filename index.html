@@ -48,6 +48,39 @@
         <div class="frame frame--arch">
           <img src="photos/hero.jpg" alt="Close-up of Parker's face in the sun" fetchpriority="high">
         </div>
+        <button class="buddy" type="button" id="buddy" aria-label="Cartoon Parker. Click to say hi">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <defs>
+              <radialGradient id="buddyGlow" cx="50%" cy="40%" r="60%">
+                <stop offset="0" stop-color="#ffcf7a"/>
+                <stop offset="1" stop-color="#ff7a45"/>
+              </radialGradient>
+            </defs>
+            <circle cx="60" cy="60" r="58" fill="url(#buddyGlow)"/>
+            <g fill="#121318">
+              <circle cx="60" cy="26" r="21"/><circle cx="36" cy="33" r="19"/><circle cx="84" cy="33" r="19"/>
+              <circle cx="26" cy="56" r="19"/><circle cx="94" cy="56" r="19"/><circle cx="32" cy="80" r="19"/>
+              <circle cx="88" cy="80" r="19"/><circle cx="60" cy="88" r="25"/>
+            </g>
+            <ellipse cx="29" cy="60" rx="12" ry="21" fill="#0b0c0f" transform="rotate(16 29 60)"/>
+            <ellipse cx="91" cy="60" rx="12" ry="21" fill="#0b0c0f" transform="rotate(-16 91 60)"/>
+            <ellipse cx="60" cy="59" rx="29" ry="29" fill="#1d1e25"/>
+            <ellipse cx="47" cy="44" rx="5" ry="3.4" fill="#c98a43"/>
+            <ellipse cx="73" cy="44" rx="5" ry="3.4" fill="#c98a43"/>
+            <ellipse cx="47" cy="55" rx="7" ry="7" fill="#f4efe6"/>
+            <ellipse cx="73" cy="55" rx="7" ry="7" fill="#f4efe6"/>
+            <g class="buddy__pupil"><circle cx="47" cy="55" r="4.3" fill="#7a4421"/><circle cx="47" cy="55" r="2.3" fill="#0a0a0a"/><circle cx="48.3" cy="53.6" r="1.1" fill="#fff"/></g>
+            <g class="buddy__pupil"><circle cx="73" cy="55" r="4.3" fill="#7a4421"/><circle cx="73" cy="55" r="2.3" fill="#0a0a0a"/><circle cx="74.3" cy="53.6" r="1.1" fill="#fff"/></g>
+            <ellipse class="buddy__lid" cx="47" cy="55" rx="7.6" ry="7.6" fill="#1d1e25"/>
+            <ellipse class="buddy__lid" cx="73" cy="55" rx="7.6" ry="7.6" fill="#1d1e25"/>
+            <ellipse cx="60" cy="73" rx="17" ry="13" fill="#2b2c34"/>
+            <path class="buddy__tongue" d="M54.5 78 Q60 94 65.5 78 Z" fill="#ff7a9a"/>
+            <path d="M52 65 Q60 60.5 68 65 Q66.5 72 60 73 Q53.5 72 52 65 Z" fill="#050506"/>
+            <ellipse cx="57" cy="64.5" rx="2.6" ry="1.2" fill="#3a3b44"/>
+            <path d="M60 73 V77 M60 77 Q54 82 49 78 M60 77 Q66 82 71 78" stroke="#050506" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span class="buddy__bubble" id="buddyBubble" aria-live="polite"></span>
+        </button>
       </figure>
     </section>
 
@@ -108,6 +141,10 @@
           <div class="meter__head"><span>Chance of waking him up</span><strong>0%</strong></div>
           <div class="meter__bar"><span style="--w: 2%"></span></div>
         </div>
+        <div class="wake anim">
+          <button class="btn btn--ghost" type="button" id="wakeBtn">⏰ Try to wake him up</button>
+          <p class="wake__msg" id="wakeMsg" aria-live="polite"></p>
+        </div>
       </div>
       <figure class="slide__photo anim">
         <div class="frame frame--wide">
@@ -129,6 +166,10 @@
           <li>🦴 Treats: always yes</li>
           <li>🥺 Puppy eyes: expert level</li>
         </ul>
+        <div class="game-cta anim">
+          <button class="btn" type="button" id="gameBtn">🎮 Play: catch the treats</button>
+          <span class="game-cta__best">Your best: <strong id="gameBest">0</strong></span>
+        </div>
       </div>
       <figure class="slide__photo anim">
         <div class="frame frame--circle">
@@ -159,7 +200,7 @@
     <!-- 7. WINTER -->
     <section class="slide" id="winter" data-title="Winter" style="--accent: #e2f3ff; --accent-2: #7dd3fc;">
       <span class="bigword" aria-hidden="true">SNOW</span>
-      <div class="snow" aria-hidden="true"></div>
+      <canvas class="snow" aria-hidden="true"></canvas>
       <div class="slide__text">
         <p class="eyebrow anim">06 — Favourite season</p>
         <h2 class="title anim">Winter is his <span class="hl">happy place.</span></h2>
@@ -169,6 +210,7 @@
           <li>🥶 Freezing cold: perfect weather</li>
           <li>🤗 Best cuddles happen in the snow</li>
         </ul>
+        <p class="hint anim"><span><span id="snowVerb">Click</span> anywhere to throw a snowball ❄️</span> <span class="hint__count"><strong id="snowCount">0</strong> thrown</span></p>
       </div>
       <figure class="slide__photo anim">
         <div class="frame frame--stamp">
@@ -188,14 +230,14 @@
         <button class="btn anim" type="button" id="barkBtn">🔊 Make him bark</button>
       </div>
       <figure class="slide__photo anim">
-        <div class="collage collage--polaroids" id="barkPhoto">
-          <div class="frame frame--polaroid frame--p1">
+        <div class="collage collage--shifts" id="barkPhoto">
+          <div class="frame frame--day">
             <img src="photos/bark.jpg" alt="Parker guarding the gate on a sunny autumn day, tongue out" decoding="async">
-            <span class="frame__caption" aria-hidden="true">day shift.</span>
+            <span class="shift-label">☀️ Day shift</span>
           </div>
-          <div class="frame frame--polaroid frame--p2">
+          <div class="frame frame--night">
             <img src="photos/home.jpg" alt="Parker guarding the house at night, tongue out" decoding="async">
-            <span class="frame__caption" aria-hidden="true">night shift.</span>
+            <span class="shift-label">🌙 Night shift</span>
           </div>
         </div>
       </figure>
@@ -216,11 +258,32 @@
         <p class="treat-msg anim" id="treatMsg">&nbsp;</p>
         <button class="restart anim" type="button" data-goto="0">↑ Back to the start</button>
       </div>
+      <div class="thanks" id="thanks" role="status" hidden>
+        <div class="thanks__paw" aria-hidden="true">🐾</div>
+        <p class="thanks__title">Parker says thank you!</p>
+        <p class="thanks__text" id="thanksText"></p>
+        <button class="btn" type="button" id="thanksBtn">You're welcome ❤️</button>
+      </div>
       <footer class="credits anim">Made with love for Parker 🐾</footer>
     </section>
 
   </main>
 
+  <!-- Mini game: catch the treats -->
+  <div class="game" id="game" role="dialog" aria-modal="true" aria-label="Catch the treats game" hidden>
+    <canvas id="gameCanvas"></canvas>
+    <div class="game__hud" aria-live="off">
+      <span>🦴 <strong id="hudScore">0</strong></span>
+      <span>⏱ <strong id="hudTime">30</strong>s</span>
+      <span>🏆 <strong id="hudBest">0</strong></span>
+    </div>
+    <button class="game__close" type="button" aria-label="Close the game">×</button>
+    <div class="game__panel" id="gamePanel"></div>
+  </div>
+
+  <canvas class="confetti" aria-hidden="true" hidden></canvas>
+
   <script src="script.js"></script>
+  <script src="fun.js"></script>
 </body>
 </html>

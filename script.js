@@ -10,6 +10,8 @@ const root = document.documentElement;
 const TRANSITION_MS = 950;
 let current = -1;
 let animating = false;
+let deckLocked = false;      // true while the mini game is open
+const slideHooks = [];       // functions called with the new slide id (see fun.js)
 
 const pad = (n) => String(n).padStart(2, "0");
 counterTotal.textContent = pad(slides.length);
@@ -58,6 +60,7 @@ function go(index) {
   history.replaceState(null, "", "#" + slides[index].id);
 
   current = index;
+  slideHooks.forEach((fn) => fn(slides[index].id));
   animating = true;
   setTimeout(() => (animating = false), TRANSITION_MS);
 }
@@ -75,6 +78,7 @@ window.addEventListener(
   "wheel",
   (e) => {
     e.preventDefault();
+    if (deckLocked) return;
     const now = performance.now();
     if (now - lastWheel > 220) gestureUsed = false;
     lastWheel = now;
@@ -90,7 +94,7 @@ window.addEventListener(
 
 // --- Keyboard ---
 window.addEventListener("keydown", (e) => {
-  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  if (e.altKey || e.ctrlKey || e.metaKey || deckLocked) return;
   const onButton = e.target.closest && e.target.closest("button, a");
 
   switch (e.key) {
@@ -135,7 +139,7 @@ window.addEventListener("touchend", (e) => {
   const dx = e.changedTouches[0].clientX - touchStart.x;
   const dy = e.changedTouches[0].clientY - touchStart.y;
   touchStart = null;
-  if (animating) return;
+  if (animating || deckLocked) return;
   if (Math.abs(dy) > 50 && Math.abs(dy) > Math.abs(dx)) dy < 0 ? next() : prev();
   else if (Math.abs(dx) > 60) dx < 0 ? next() : prev();
 });
@@ -157,25 +161,6 @@ go(startIndex);
 window.addEventListener("hashchange", () => {
   const i = slides.findIndex((s) => "#" + s.id === location.hash);
   if (i >= 0) go(i);
-});
-
-/* =========================================================
-   Falling snow on the winter slide
-   ========================================================= */
-document.querySelectorAll(".snow").forEach((layer) => {
-  const count = window.innerWidth < 820 ? 28 : 55;
-  for (let i = 0; i < count; i++) {
-    const flake = document.createElement("i");
-    const size = 2 + Math.random() * 5;
-    flake.style.left = Math.random() * 100 + "%";
-    flake.style.setProperty("--s", size.toFixed(1) + "px");
-    flake.style.setProperty("--o", (0.35 + Math.random() * 0.55).toFixed(2));
-    flake.style.setProperty("--b", size > 5 ? "1px" : "0px");
-    flake.style.setProperty("--d", (7 + Math.random() * 9).toFixed(1) + "s");
-    flake.style.setProperty("--delay", (-Math.random() * 16).toFixed(1) + "s");
-    flake.style.setProperty("--x", (Math.random() * 120 - 60).toFixed(0) + "px");
-    layer.appendChild(flake);
-  }
 });
 
 /* =========================================================
@@ -268,6 +253,7 @@ function treatMessage(n) {
 const treatEmojis = ["🦴", "🍖", "🥩", "🧀", "❤️", "🐾"];
 
 treatBtn.addEventListener("click", (e) => {
+  const before = treats;
   treats += 1;
   treatCount.textContent = treats.toLocaleString("en-US");
   treatMsg.textContent = treatMessage(treats);
@@ -296,4 +282,7 @@ treatBtn.addEventListener("click", (e) => {
     document.body.appendChild(s);
     s.addEventListener("animationend", () => s.remove());
   }
+
+  // confetti + thank-you card at 10, 25, 50, 100... treats (fun.js)
+  if (typeof celebrate === "function") celebrate(before, treats);
 });
