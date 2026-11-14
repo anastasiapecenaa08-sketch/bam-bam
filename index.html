@@ -1,252 +1,159 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Бам-Бам — самый лучший пёс</title>
-  <meta name="description" content="Сайт про Бам-Бама: характер, любимые вещи, распорядок дня и фотографии.">
-  <meta name="theme-color" content="#0c0e13">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Parker — Tibetan Mastiff</title>
+  <meta name="description" content="Meet Parker: a 70 kg Tibetan Mastiff who sleeps like a rock, eats like an elephant and barks like a legend.">
+  <meta name="theme-color" content="#0b0c10">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- ============ НАВИГАЦИЯ ============ -->
-  <header class="nav" id="top">
-    <a class="nav__logo" href="#top">
-      <span class="paw" aria-hidden="true">🐾</span> Бам-Бам
-    </a>
-    <button class="nav__toggle" aria-label="Открыть меню" aria-expanded="false">
-      <span></span><span></span>
-    </button>
-    <nav class="nav__links" aria-label="Разделы">
-      <a href="#about">Обо мне</a>
-      <a href="#favorites">Любимое</a>
-      <a href="#day">Мой день</a>
-      <a href="#gallery">Фото</a>
-    </nav>
+  <!-- Top bar -->
+  <header class="topbar">
+    <a class="logo" href="#hello" data-goto="0"><span aria-hidden="true">🐾</span> Parker</a>
+    <div class="counter" aria-hidden="true">
+      <span class="counter__current">01</span>
+      <span class="counter__sep">/</span>
+      <span class="counter__total">07</span>
+    </div>
   </header>
 
-  <main>
+  <!-- Side navigation dots (filled by script.js) -->
+  <nav class="dots" aria-label="Slides"></nav>
 
-    <!-- ============ ГЛАВНЫЙ ЭКРАН ============ -->
-    <section class="hero">
-      <div class="hero__glow hero__glow--orange" aria-hidden="true"></div>
-      <div class="hero__glow hero__glow--mint" aria-hidden="true"></div>
+  <!-- Progress bar -->
+  <div class="progress" aria-hidden="true"><span></span></div>
 
-      <div class="hero__text reveal">
-        <p class="eyebrow">Официальный сайт одного хорошего мальчика</p>
-        <h1 class="hero__title">
-          Привет, я<br><span class="accent-gradient">Бам-Бам</span>
-        </h1>
-        <p class="hero__lead">
-          Профессиональный охотник за мячиками, эксперт по диванам
-          и главный встречающий у двери. Добро пожаловать в мой мир!
-        </p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#about">Познакомиться</a>
-          <a class="btn btn--ghost" href="#gallery">Смотреть фото</a>
-        </div>
+  <main class="deck">
+
+    <!-- 1. HELLO -->
+    <section class="slide slide--hero" id="hello" data-title="Hello" style="--accent: #ffb547; --accent-2: #ff7a45;">
+      <span class="bigword" aria-hidden="true">PARKER</span>
+      <div class="slide__text">
+        <p class="eyebrow anim">The official website of a very big, very good boy</p>
+        <h1 class="title anim">Meet <span class="hl">Parker.</span></h1>
+        <p class="lead anim">Seventy kilos of fluff, snacks and pure chaos. Scroll to get to know him.</p>
+        <button class="scroll-hint anim" type="button" data-next>
+          <span class="mouse" aria-hidden="true"><span></span></span>
+          Scroll to begin
+        </button>
       </div>
-
-      <div class="hero__photo reveal">
-        <figure class="photo-frame">
-          <!-- Положите фото в папку photos/ с именем hero.jpg -->
-          <img src="photos/hero.jpg" alt="Бам-Бам" data-fallback="🐶">
-        </figure>
-        <span class="badge badge--1">🎾 Мячик — моё всё</span>
-        <span class="badge badge--2">❤️ Хороший мальчик</span>
-      </div>
+      <figure class="slide__photo anim">
+        <img src="photos/hero.jpg" alt="Close-up of Parker's face in the sun" fetchpriority="high">
+      </figure>
     </section>
 
-    <!-- ============ КОРОТКИЕ ФАКТЫ ============ -->
-    <section class="stats">
-      <!-- Поменяйте значения на настоящие -->
-      <div class="stat reveal">
-        <span class="stat__value">3 года</span>
-        <span class="stat__label">Возраст</span>
+    <!-- 2. THE BASICS -->
+    <section class="slide slide--flip" id="basics" data-title="The basics" style="--accent: #7cc8ff; --accent-2: #a5f3ff;">
+      <span class="bigword" aria-hidden="true">BEAR</span>
+      <div class="slide__text">
+        <p class="eyebrow anim">01 — The basics</p>
+        <h2 class="title anim">A Tibetan Mastiff.<br><span class="hl">Basically a bear.</span></h2>
+        <p class="lead anim">His ancestors guarded monasteries high in the Himalayas. Parker guards the couch, the kitchen and the front gate — with exactly the same dedication.</p>
+        <dl class="stats anim">
+          <div class="stat"><dt>Age</dt><dd>7 <small>years</small></dd></div>
+          <div class="stat"><dt>Weight</dt><dd>65–70 <small>kg</small></dd></div>
+          <div class="stat stat--breed"><dt>Breed</dt><dd>Tibetan <small>Mastiff</small></dd></div>
+          <div class="stat"><dt>Fluff</dt><dd>∞</dd></div>
+        </dl>
       </div>
-      <div class="stat reveal">
-        <span class="stat__value">Метис</span>
-        <span class="stat__label">Порода</span>
-      </div>
-      <div class="stat reveal">
-        <span class="stat__value">18 кг</span>
-        <span class="stat__label">Чистой любви</span>
-      </div>
-      <div class="stat reveal">
-        <span class="stat__value">∞</span>
-        <span class="stat__label">Виляний хвостом</span>
-      </div>
+      <figure class="slide__photo anim">
+        <img src="photos/breed.jpg" alt="Parker sitting proudly in a snowy forest" decoding="async">
+      </figure>
     </section>
 
-    <!-- ============ ОБО МНЕ ============ -->
-    <section class="section" id="about">
-      <div class="section__head reveal">
-        <p class="eyebrow">01 — Обо мне</p>
-        <h2>Кто такой Бам-Бам?</h2>
-      </div>
-
-      <div class="about">
-        <div class="about__text reveal">
-          <p>
-            Я появился в семье и сразу понял: здесь мой дом. С тех пор я
-            отвечаю за хорошее настроение, громкие приветствия и проверку
-            всех пакетов из магазина.
-          </p>
-          <p>
-            Я обожаю долгие прогулки, новых друзей на площадке и спать,
-            свернувшись клубочком. Гром и пылесос — мои главные враги,
-            но с хозяйкой рядом мне ничего не страшно.
-          </p>
+    <!-- 3. SLEEP -->
+    <section class="slide" id="sleep" data-title="Sleep" style="--accent: #a78bfa; --accent-2: #c4b5fd;">
+      <span class="bigword" aria-hidden="true">ZZZ</span>
+      <div class="slide__text">
+        <p class="eyebrow anim">02 — Hobby number one</p>
+        <h2 class="title anim">Professional <span class="hl">sleeper.</span></h2>
+        <p class="lead anim">When Parker sleeps, Parker <em>sleeps</em>. Alarms, doorbells, thunder, someone yelling his name — nothing works. He wakes up when he decides it's time. Not a minute earlier.</p>
+        <div class="meter anim">
+          <div class="meter__head"><span>Chance of waking him up</span><strong>0%</strong></div>
+          <div class="meter__bar"><span style="--w: 2%"></span></div>
         </div>
+      </div>
+      <figure class="slide__photo anim">
+        <img src="photos/sleep.jpg" alt="Sleepy Parker lying on the grass with his purple ring toy" decoding="async">
+        <span class="zzz" aria-hidden="true"><i>z</i><i>z</i><i>Z</i></span>
+      </figure>
+    </section>
 
-        <ul class="traits reveal" aria-label="Черты характера">
-          <li class="trait trait--orange">Энерджайзер</li>
-          <li class="trait trait--mint">Обнимашка</li>
-          <li class="trait trait--pink">Хитрюга</li>
-          <li class="trait trait--orange">Обжора</li>
-          <li class="trait trait--mint">Верный друг</li>
-          <li class="trait trait--pink">Соня</li>
-          <li class="trait trait--orange">Любопытный нос</li>
+    <!-- 4. FOOD -->
+    <section class="slide slide--flip" id="food" data-title="Food" style="--accent: #ff8a3d; --accent-2: #ffc46b;">
+      <span class="bigword" aria-hidden="true">NOM</span>
+      <div class="slide__text">
+        <p class="eyebrow anim">03 — Hobby number two</p>
+        <h2 class="title anim">Eats like an <span class="hl">elephant.</span></h2>
+        <p class="lead anim">His bowl is empty before it even touches the floor. And treats? Treats are his entire personality. One look from those eyes and you'll hand over everything you've got.</p>
+        <ul class="chips anim">
+          <li>🍖 Bowl empty in seconds</li>
+          <li>🦴 Treats: always yes</li>
+          <li>🥺 Puppy eyes: expert level</li>
         </ul>
       </div>
+      <figure class="slide__photo anim">
+        <img src="photos/food.jpg" alt="Parker in the snow looking up with begging eyes" decoding="async">
+      </figure>
     </section>
 
-    <!-- ============ ЛЮБИМОЕ ============ -->
-    <section class="section" id="favorites">
-      <div class="section__head reveal">
-        <p class="eyebrow">02 — Любимое</p>
-        <h2>То, без чего я не могу</h2>
+    <!-- 5. ENERGY -->
+    <section class="slide" id="energy" data-title="Energy" style="--accent: #4ff0b4; --accent-2: #b6ff6b;">
+      <span class="bigword" aria-hidden="true">ZOOM</span>
+      <div class="slide__text">
+        <p class="eyebrow anim">04 — Plot twist</p>
+        <h2 class="title anim">70 kilos of <span class="hl">pure energy.</span></h2>
+        <p class="lead anim">Don't let the sleepy bear fool you. Once he's up, Parker storms through the snow, plays with his toys and leaves giant paw prints everywhere. Big dog, big zoomies.</p>
+        <div class="meter anim">
+          <div class="meter__head"><span>Energy level</span><strong>110%</strong></div>
+          <div class="meter__bar"><span style="--w: 100%"></span></div>
+        </div>
       </div>
-
-      <div class="cards">
-        <article class="card reveal" style="--card-accent: var(--orange)">
-          <span class="card__icon" aria-hidden="true">🍖</span>
-          <h3>Еда</h3>
-          <p>Курочка, сыр и всё, что упало со стола. Особенно то, что нельзя.</p>
-        </article>
-        <article class="card reveal" style="--card-accent: var(--mint)">
-          <span class="card__icon" aria-hidden="true">🎾</span>
-          <h3>Игрушка</h3>
-          <p>Потрёпанный теннисный мячик. Новые не предлагать — этот лучший.</p>
-        </article>
-        <article class="card reveal" style="--card-accent: var(--pink)">
-          <span class="card__icon" aria-hidden="true">🛋️</span>
-          <h3>Место</h3>
-          <p>Диван. Да, тот самый, на который мне нельзя. Но очень хочется.</p>
-        </article>
-        <article class="card reveal" style="--card-accent: var(--violet)">
-          <span class="card__icon" aria-hidden="true">🌳</span>
-          <h3>Занятие</h3>
-          <p>Нюхать каждый куст в парке и оставлять там свои новости.</p>
-        </article>
-      </div>
+      <figure class="slide__photo anim">
+        <img src="photos/energy.jpg" alt="Parker running through falling snow at night, leaving paw prints" decoding="async">
+      </figure>
     </section>
 
-    <!-- ============ МОЙ ДЕНЬ ============ -->
-    <section class="section" id="day">
-      <div class="section__head reveal">
-        <p class="eyebrow">03 — Мой день</p>
-        <h2>Очень важное расписание</h2>
+    <!-- 6. BARK -->
+    <section class="slide slide--flip" id="bark" data-title="Bark" style="--accent: #ff5c93; --accent-2: #ff9ec0;">
+      <span class="bigword" aria-hidden="true">WOOF</span>
+      <div class="slide__text">
+        <p class="eyebrow anim">05 — The voice</p>
+        <h2 class="title anim">The legendary <span class="hl">bark.</span></h2>
+        <p class="lead anim">Deep, loud and somehow completely hilarious. Nobody gets past the gate unannounced — and nobody keeps a straight face once he gets going.</p>
+        <button class="btn anim" type="button" id="barkBtn">🔊 Make him bark</button>
       </div>
-
-      <ol class="timeline">
-        <li class="timeline__item reveal">
-          <time>07:00</time>
-          <div>
-            <h3>Будильник с языком</h3>
-            <p>Бужу всех облизыванием. Кто не встал — тот получает лапой.</p>
-          </div>
-        </li>
-        <li class="timeline__item reveal">
-          <time>08:00</time>
-          <div>
-            <h3>Утренняя прогулка</h3>
-            <p>Обход территории, проверка всех столбов и приветствие соседских собак.</p>
-          </div>
-        </li>
-        <li class="timeline__item reveal">
-          <time>12:00</time>
-          <div>
-            <h3>Охрана дома</h3>
-            <p>Слежу за курьерами и голубями из окна. Сплю — но вполглаза.</p>
-          </div>
-        </li>
-        <li class="timeline__item reveal">
-          <time>18:00</time>
-          <div>
-            <h3>Встреча у двери</h3>
-            <p>Самый счастливый момент дня: все вернулись домой!</p>
-          </div>
-        </li>
-        <li class="timeline__item reveal">
-          <time>22:00</time>
-          <div>
-            <h3>Отбой</h3>
-            <p>Занимаю лучшее место на кровати и храплю до утра.</p>
-          </div>
-        </li>
-      </ol>
+      <figure class="slide__photo anim" id="barkPhoto">
+        <img src="photos/bark.jpg" alt="Parker sitting by the gate with his tongue out" decoding="async">
+      </figure>
     </section>
 
-    <!-- ============ ГАЛЕРЕЯ ============ -->
-    <section class="section" id="gallery">
-      <div class="section__head reveal">
-        <p class="eyebrow">04 — Фото</p>
-        <h2>Моя фотосессия</h2>
-        <p class="section__note">Нажмите на фото, чтобы увеличить.</p>
+    <!-- 7. TREAT -->
+    <section class="slide slide--final" id="treat" data-title="Treat" style="--accent: #ffb547; --accent-2: #ff5c93;">
+      <span class="bigword" aria-hidden="true">GOOD BOY</span>
+      <div class="slide__text">
+        <p class="eyebrow anim">06 — Your turn</p>
+        <h2 class="title anim">Give Parker <span class="hl">a treat.</span></h2>
+        <p class="lead anim">He's been a very good boy. He always is.</p>
+        <button class="treat-btn anim" type="button" id="treatBtn">
+          <span class="treat-btn__icon" aria-hidden="true">🦴</span>
+          <span>Give a treat</span>
+        </button>
+        <p class="treat-count anim" aria-live="polite">Treats given: <strong id="treatCount">0</strong></p>
+        <p class="treat-msg anim" id="treatMsg">&nbsp;</p>
+        <button class="restart anim" type="button" data-goto="0">↑ Back to the start</button>
       </div>
-
-      <!-- Положите фотографии в папку photos/ с именами 1.jpg … 6.jpg -->
-      <div class="gallery">
-        <figure class="gallery__item gallery__item--tall reveal">
-          <img src="photos/1.jpg" alt="Бам-Бам на прогулке" data-fallback="🌳" loading="lazy">
-        </figure>
-        <figure class="gallery__item reveal">
-          <img src="photos/2.jpg" alt="Бам-Бам с мячиком" data-fallback="🎾" loading="lazy">
-        </figure>
-        <figure class="gallery__item reveal">
-          <img src="photos/3.jpg" alt="Бам-Бам спит" data-fallback="💤" loading="lazy">
-        </figure>
-        <figure class="gallery__item gallery__item--wide reveal">
-          <img src="photos/4.jpg" alt="Бам-Бам на диване" data-fallback="🛋️" loading="lazy">
-        </figure>
-        <figure class="gallery__item reveal">
-          <img src="photos/5.jpg" alt="Бам-Бам ждёт вкусняшку" data-fallback="🍖" loading="lazy">
-        </figure>
-        <figure class="gallery__item reveal">
-          <img src="photos/6.jpg" alt="Бам-Бам улыбается" data-fallback="😊" loading="lazy">
-        </figure>
-      </div>
-    </section>
-
-    <!-- ============ ПОГЛАДИТЬ ============ -->
-    <section class="pet reveal">
-      <h2>Погладь Бам-Бама!</h2>
-      <p>Каждое нажатие — одно почёсывание за ушком.</p>
-      <button class="pet__btn" type="button" aria-live="polite">
-        <span class="pet__emoji" aria-hidden="true">🐕</span>
-        <span>Погладить</span>
-      </button>
-      <p class="pet__count">Меня погладили <strong id="petCount">0</strong> <span id="petWord">раз</span></p>
+      <footer class="credits anim">Made with love for Parker 🐾</footer>
     </section>
 
   </main>
-
-  <footer class="footer">
-    <p>Сделано с любовью к Бам-Баму <span class="paw" aria-hidden="true">🐾</span></p>
-    <a href="#top" class="footer__up">Наверх ↑</a>
-  </footer>
-
-  <!-- Просмотр фото на весь экран -->
-  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фото" hidden>
-    <button class="lightbox__close" aria-label="Закрыть">×</button>
-    <img alt="">
-  </div>
 
   <script src="script.js"></script>
 </body>
